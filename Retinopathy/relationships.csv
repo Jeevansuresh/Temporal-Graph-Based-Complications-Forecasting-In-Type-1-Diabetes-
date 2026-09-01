@@ -1,0 +1,14 @@
+subject,relation,object,evidence_id,population,directionality,evidence_strength
+T1D,associated_with,Retinopathy_Risk,C009,Pediatric T1D,positive,supporting
+T1D_Duration,associated_with,Retinopathy_Risk,C004,Pediatric/young T1D,positive,high
+HbA1c,associated_with,Retinopathy_Risk,C004,T1D,positive,high
+HbA1c_Variability,associated_with,Retinopathy_Risk,C006,Adolescents with T1D,positive,moderate
+Blood_Pressure_Status,associated_with,Retinopathy_Risk,C008,Children/adolescents with T1D,positive,moderate
+Dyslipidemia,associated_with,Retinopathy_Risk,C009,Pediatric T1D,positive,moderate
+Albuminuria,associated_with,Retinopathy_Risk,C009,Pediatric T1D,positive,moderate
+Retinal_Exam,records,Retinopathy_Stage,C010,Clinical retinal assessment,positive,high
+No_DR,stage_before,Mild_NPDR,C010,Clinical classification,ordered,high
+Mild_NPDR,stage_before,Moderate_NPDR,C010,Clinical classification,ordered,high
+Moderate_NPDR,stage_before,Severe_NPDR,C010,Clinical classification,ordered,high
+Severe_NPDR,stage_before,PDR,C010,Clinical classification,ordered,high
+Retinal_Stage_Change,signals,Retinopathy_Progression,C010,Patient longitudinal data,positive,high

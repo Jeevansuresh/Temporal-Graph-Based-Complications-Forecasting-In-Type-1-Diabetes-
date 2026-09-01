@@ -1,0 +1,14 @@
+rule_id,trigger,logical_condition,temporal_requirement,output_concept,evidence_id
+R001,Initial screening eligibility,T1D_Duration >= 3 years AND (Age >= 11 OR Puberty_Status = started),initial screen not previously completed,Screening_Eligible,C001
+R002,Repeat screening due,Initial retinal exam completed,about 2 years since last exam; allow clinician override,Screening_Due,C002
+R003,Incident retinopathy,Previous retinal stage = No_DR AND current stage > No_DR,consecutive retinal assessments,Incident_Retinopathy,C010
+R004,Observed retinal progression,Current retinal stage > previous retinal stage,consecutive retinal assessments,Retinopathy_Progression,C010
+R005,Stable retinal stage,Current stage = previous stage,consecutive retinal assessments,Stable_Retinal_State,C010
+R006,Worsening glycemic trajectory,HbA1c slope > 0 OR high long-term HbA1c exposure OR high HbA1c variability,prefer >=3 observations for trajectory/variability,Glycemic_Risk_Signal,C003/C004/C006
+R007,BP risk signal,Repeated elevated pediatric-contextualized BP status,prefer repeated observations,BP_Risk_Signal,C008/C009
+R008,Lipid risk signal,Dyslipidemia present or worsening lipid trajectory,prefer repeated observations,Lipid_Risk_Signal,C009
+R009,Kidney/systemic microvascular signal,Persistent albuminuria or worsening kidney trajectory,prefer repeated observations,Kidney_Context_Risk_Signal,C009
+R010,Existing retinopathy + multiple systemic signals,Current stage > No_DR AND at least two independent systemic risk signals,same longitudinal assessment window,INCREASING_CONCERN,C003/C008/C009
+R011,Direct progression dominates,Incident_Retinopathy OR Retinopathy_Progression,consecutive retinal assessments,HIGH_CONCERN,C010
+R012,Risk without retinal progression,No observed stage progression AND at least two systemic risk signals,same longitudinal window,WATCH,C003/C004/C006/C008/C009
+R013,Insufficient data,No recent retinal stage or exam result unavailable,current record,INSUFFICIENT_DATA,C001/C002
