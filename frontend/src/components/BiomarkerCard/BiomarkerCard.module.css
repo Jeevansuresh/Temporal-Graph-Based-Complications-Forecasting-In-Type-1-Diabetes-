@@ -1,0 +1,119 @@
+.card {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.worsening {
+  border-color: var(--color-red);
+  box-shadow: 0 0 10px var(--color-red-glow);
+}
+
+.improving {
+  border-color: var(--color-green);
+  box-shadow: 0 0 10px var(--color-green-glow);
+}
+
+.stable {
+  border-color: var(--color-border-strong);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h4 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.icon {
+  color: inherit;
+}
+.worsening .icon { color: var(--color-red); }
+.improving .icon { color: var(--color-green); }
+.stable .icon { color: var(--color-text-muted); }
+
+.values {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.changeBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+}
+
+.value {
+  font-size: 1.25rem;
+}
+
+.latest {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+.statValue {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-text-primary);
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.tag {
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: var(--color-glass);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.worsening .tag {
+  color: var(--color-red);
+  border-color: var(--color-red);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.improving .tag {
+  color: var(--color-green);
+  border-color: var(--color-green);
+  background-color: rgba(16, 185, 129, 0.1);
+}
