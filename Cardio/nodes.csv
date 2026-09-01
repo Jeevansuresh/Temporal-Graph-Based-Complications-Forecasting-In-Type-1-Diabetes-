@@ -1,0 +1,34 @@
+concept_id,name,type,synonyms,unit,description
+1,T1D,Condition,Type 1 diabetes;T1DM,,Type 1 diabetes mellitus; the underlying chronic condition modeled by this graph.
+2,Age,Context,,years,Patient age in years.
+3,Sex,Context,,,Patient sex.
+4,T1D_Duration,Context,Diabetes duration,years,Years since T1D diagnosis; duration is a cardiovascular risk modifier in T1D.
+5,HbA1c,Measurement,A1C;Glycated hemoglobin,%,Glycated hemoglobin measurement reflecting longer-term glycemic exposure.
+6,Systolic_BP,Measurement,SBP,mmHg,Systolic blood pressure.
+7,Diastolic_BP,Measurement,DBP,mmHg,Diastolic blood pressure.
+8,Hypertension,Condition,High blood pressure,,Hypertension; an established cardiovascular risk factor in people with T1D.
+9,LDL_Cholesterol,Measurement,LDL-C;Low-density lipoprotein cholesterol,mg/dL,Low-density lipoprotein cholesterol concentration.
+10,HDL_Cholesterol,Measurement,HDL-C;High-density lipoprotein cholesterol,mg/dL,High-density lipoprotein cholesterol concentration.
+11,Triglycerides,Measurement,TG,mg/dL,Serum triglyceride concentration.
+12,Dyslipidemia,Condition,Hyperlipidemia,,Abnormal lipid profile relevant to cardiovascular risk.
+13,Smoking,Behavior,Tobacco use;Smoking status,,Current tobacco exposure/status; a modifiable cardiovascular risk factor.
+14,Obesity,Condition,Overweight/obesity,,"Excess adiposity/obesity, a cardiovascular risk modifier."
+15,UACR,Measurement,Urine albumin-to-creatinine ratio;ACR,mg/g,"Urine albumin-to-creatinine ratio, a marker of albuminuria and cardiorenal risk."
+16,Albuminuria,Condition,Elevated urinary albumin,,Abnormally increased urinary albumin excretion.
+17,eGFR,Measurement,Estimated glomerular filtration rate,mL/min/1.73m2,"Estimated glomerular filtration rate, used to characterize kidney function."
+18,Chronic_Kidney_Disease,Condition,CKD,,Chronic kidney disease; an important cardiovascular risk modifier in diabetes.
+19,Cardiovascular_Risk,Concept,CVD risk;CV risk,,Risk state representing elevated likelihood of cardiovascular disease/events.
+20,ASCVD,Condition,Atherosclerotic cardiovascular disease,,"Atherosclerotic cardiovascular disease, including coronary, cerebrovascular, and peripheral arterial disease."
+21,Myocardial_Infarction,Condition,MI;Heart attack,,Acute myocardial infarction.
+22,Stroke,Condition,Cerebrovascular event,,Stroke due to cerebrovascular disease.
+23,Peripheral_Artery_Disease,Condition,PAD;Peripheral arterial disease,,Peripheral artery disease.
+24,Heart_Failure,Condition,HF;Congestive heart failure,,"Clinical heart failure, including preserved or reduced ejection fraction phenotypes."
+25,Heart_Failure_Risk,Concept,HF risk,,Risk state for developing heart failure.
+26,BNP_NTproBNP,Measurement,BNP;NT-proBNP;Natriuretic peptide,pg/mL,Natriuretic peptide biomarker used in heart-failure risk assessment/screening.
+27,ECG_Abnormality,Finding,Abnormal ECG;Electrocardiographic abnormality,,Electrocardiographic abnormality that may prompt cardiovascular investigation.
+28,Coronary_Artery_Disease,Condition,CAD;Coronary heart disease;CHD,,Coronary artery disease / coronary heart disease.
+29,Cardiovascular_Death,Outcome,CV death,,Death attributable to cardiovascular disease.
+30,MACE,Outcome,Major adverse cardiovascular events,,Composite cardiovascular outcome; exact component definition depends on the study/source.
+31,Heart_Failure_Evaluation_Indicated,Process_State,,,State indicating that heart-failure evaluation is indicated after an abnormal natriuretic peptide result.
+32,Secondary_Cardiovascular_Prevention_Context,Context_State,,,Context representing established ASCVD in a person with T1D.
+33,Coronary_Investigation_Considered,Process_State,,,"State indicating that coronary/vascular investigation may be considered based on symptoms, vascular findings, or ECG abnormality."

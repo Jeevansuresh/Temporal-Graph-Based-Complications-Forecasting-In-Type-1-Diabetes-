@@ -1,0 +1,21 @@
+subject,relation,object,evidence_id,population,directionality,confidence
+T1D,risk_factor_for,Cardiovascular_Risk,E001,T1D (adult and general diabetes evidence),directed,high
+T1D_Duration,associated_with,Cardiovascular_Risk,E002,T1D (adult),directed,high
+HbA1c,associated_with,Cardiovascular_Risk,E003,T1D (adult),directed,high
+Systolic_BP,associated_with,Cardiovascular_Risk,E001,T1D (adult),directed,high
+Diastolic_BP,associated_with,Cardiovascular_Risk,E001,T1D (adult),directed,high
+Hypertension,risk_factor_for,ASCVD,E001,T1D (adult/general diabetes evidence),directed,high
+LDL_Cholesterol,associated_with,Cardiovascular_Risk,E001,T1D (adult),directed,moderate
+Dyslipidemia,risk_factor_for,Cardiovascular_Risk,E001,T1D (adult),directed,high
+Smoking,risk_factor_for,Cardiovascular_Risk,E001,T1D (adult),directed,high
+Obesity,risk_factor_for,Cardiovascular_Risk,E001,T1D (adult),directed,moderate
+Albuminuria,associated_with,Cardiovascular_Risk,E004,T1D (adult),directed,high
+Chronic_Kidney_Disease,risk_factor_for,Cardiovascular_Risk,E001,Diabetes (includes T1D),directed,high
+BNP_NTproBNP,used_for_assessment_of,Heart_Failure_Risk,E005,Adults with diabetes,directed,high
+ECG_Abnormality,may_prompt_investigation_for,Coronary_Artery_Disease,E005,Adults with diabetes,directed,moderate
+Cardiovascular_Risk,associated_with,ASCVD,E001,T1D/diabetes,directed,high
+ASCVD,includes,Myocardial_Infarction,E005,General clinical definition,directed,high
+ASCVD,includes,Stroke,E005,General clinical definition,directed,high
+ASCVD,includes,Peripheral_Artery_Disease,E005,General clinical definition,directed,high
+Cardiovascular_Risk,associated_with,Heart_Failure_Risk,E005,Adults with diabetes,directed,moderate
+Albuminuria,associated_with,Chronic_Kidney_Disease,E006,T1D/adult,directed,high

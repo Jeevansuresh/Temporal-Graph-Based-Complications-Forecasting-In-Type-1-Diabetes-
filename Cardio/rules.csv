@@ -1,0 +1,8 @@
+rule_id,trigger,logical_condition,temporal_requirement,output_concept,evidence_id
+R001,Systolic_BP >= 130 mmHg OR Diastolic_BP >= 80 mmHg,"Adult, nonpregnant patient; confirm according to the applicable BP measurement protocol",Use current/confirmed blood-pressure assessment; not a single unverified home or clinic value,Hypertension,E001
+R002,UACR >= 30 mg/g,Adult diabetes context; interpret albuminuria using the applicable laboratory and clinical confirmation framework,"If used to identify persistent albuminuria, repeated measurements/confirmation are required; this rule alone does not diagnose CKD",Albuminuria,E006
+R003,eGFR < 60 mL/min/1.73m2,Adult CKD framework,Persistence/chronicity is required for CKD classification; a single low eGFR is not sufficient to establish chronicity,Chronic_Kidney_Disease,E006
+R004,BNP_NTproBNP is above the assay-specific abnormal threshold,Asymptomatic adult with diabetes being evaluated for heart-failure risk,Current biomarker result; threshold is assay-specific and must not be hard-coded from a single universal cutoff,Heart_Failure_Risk,E005
+R005,BNP_NTproBNP abnormal,Adult with diabetes,"After an abnormal natriuretic peptide result, echocardiography is recommended by ADA to identify stage B heart failure",Heart_Failure_Evaluation_Indicated,E005
+R006,T1D AND established_ASCVD = true,Adult with T1D,Current/previous established ASCVD event or diagnosis,Secondary_Cardiovascular_Prevention_Context,E001
+R007,T1D AND cardiac_or_associated_vascular_symptoms = true OR ECG_Abnormality = true,Adult with diabetes,Current symptoms/finding; asymptomatic routine CAD screening is otherwise not recommended,Coronary_Investigation_Considered,E005
