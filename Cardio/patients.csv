@@ -1,0 +1,5 @@
+patient_id,patient_label,sex,baseline_cvd_context,temporal_pattern
+P001,Synthetic Patient 001,M,No known ASCVD,Stable low-moderate longitudinal pattern
+P002,Synthetic Patient 002,F,No known ASCVD,Hypertension + albuminuria + dyslipidemia pattern
+P003,Synthetic Patient 003,M,No established ASCVD,Progressive cardiometabolic risk; later abnormal ECG/BNP
+P004,Synthetic Patient 004,F,Established ASCVD/CAD history,Secondary-prevention longitudinal pattern
