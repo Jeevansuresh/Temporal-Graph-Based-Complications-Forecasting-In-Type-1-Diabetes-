@@ -89,25 +89,49 @@
 .footer {
   margin-top: auto;
   padding-top: 1rem;
+  display: flex;
+  gap: 8px;
 }
 
 .cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 10px;
-  background-color: var(--color-glass);
-  border: 1px solid var(--color-border-subtle);
+  gap: 6px;
+  flex: 1;
+  padding: 8px 10px;
+  background-color: var(--color-cyan-glow);
+  border: 1px solid var(--color-cyan);
   border-radius: var(--radius-md);
   color: var(--color-cyan);
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.82rem;
+  font-weight: 600;
   transition: all 0.2s ease;
 }
 
 .cta:hover {
-  background-color: var(--color-cyan-glow);
-  border-color: var(--color-cyan);
+  background-color: var(--color-cyan);
+  color: var(--color-bg-base);
+}
+
+.ctaAlt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  padding: 8px 10px;
+  background-color: var(--color-glass);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.ctaAlt:hover {
+  background-color: var(--color-glass-hover);
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
 }

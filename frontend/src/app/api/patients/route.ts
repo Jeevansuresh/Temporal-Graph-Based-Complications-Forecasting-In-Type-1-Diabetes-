@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { getNeo4jDriver } from '@/lib/neo4j';
+import { getNeo4jDriver, DEFAULT_DATABASE } from '@/lib/neo4j';
 
 export async function GET() {
   const driver = getNeo4jDriver();
-  const session = driver.session();
+  const session = driver.session(DEFAULT_DATABASE ? { database: DEFAULT_DATABASE } : undefined);
   
   try {
     const result = await session.run(`

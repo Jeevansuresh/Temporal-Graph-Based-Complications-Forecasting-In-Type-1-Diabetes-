@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${plexMono.variable}`}>
-      <body>
+      <body suppressHydrationWarning>
         <div className="page-container">
           <Sidebar />
           <main className="main-content">

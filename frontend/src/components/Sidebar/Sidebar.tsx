@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation';
 import { Users, Activity, Heart, Eye, Network, BookOpen, Search } from 'lucide-react';
 import styles from './Sidebar.module.css';
 
-const navItems = [
+const navItems: { href: string; label: string; icon: any; exact?: boolean; suffix?: boolean; badge?: string }[] = [
   { href: '/patients', label: 'Patient Cohort', icon: Users, exact: true },
   { href: '/kidney', label: 'Kidney Module', icon: Activity, suffix: true },
   { href: '/cardio', label: 'Cardio Module', icon: Heart, suffix: true },
-  { href: '/retinopathy', label: 'Retinopathy', icon: Eye, suffix: true, badge: 'Soon' as const },
+  { href: '/retinopathy', label: 'Retinopathy', icon: Eye, suffix: true },
   { href: '/knowledge-graph', label: 'Knowledge Graph', icon: Network },
   { href: '/evidence', label: 'Evidence Library', icon: BookOpen },
 ];

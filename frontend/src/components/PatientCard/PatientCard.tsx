@@ -69,7 +69,13 @@ export default function PatientCard({ patient, timeline, trends, patientPattern 
 
       <div className={styles.footer}>
         <Link href={`/patients/${patient.patient_id}/kidney`} className={styles.cta}>
-          View Full Analysis <ArrowRight size={16} />
+          Kidney <ArrowRight size={14} />
+        </Link>
+        <Link href={`/patients/${patient.patient_id}/cardio`} className={styles.ctaAlt}>
+          Cardio <ArrowRight size={14} />
+        </Link>
+        <Link href={`/patients/${patient.patient_id}/retinopathy`} className={styles.ctaAlt}>
+          Retinal <ArrowRight size={14} />
         </Link>
       </div>
     </div>

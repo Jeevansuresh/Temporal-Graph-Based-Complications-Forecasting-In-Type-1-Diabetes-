@@ -1,0 +1,224 @@
+{
+  "schema": {
+    "retinal_stage": {
+      "0": "No DR",
+      "1": "Mild NPDR",
+      "2": "Moderate NPDR",
+      "3": "Severe NPDR",
+      "4": "PDR"
+    },
+    "note": "Synthetic cases for software testing/demo only; not clinical evidence."
+  },
+  "cases": [
+    {
+      "id": "P001",
+      "description": "Stable no-DR trajectory",
+      "age": 13,
+      "sex": "F",
+      "height_cm": 154,
+      "puberty_status": "started",
+      "t1d_diagnosis": "2017-01-10",
+      "timeline": [
+        {
+          "date": "2024-01-10",
+          "hba1c": 7.0,
+          "sbp": 110,
+          "dbp": 70,
+          "ldl": 90,
+          "uacr": 8,
+          "egfr": 112,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2025-01-10",
+          "hba1c": 7.1,
+          "sbp": 111,
+          "dbp": 70,
+          "ldl": 92,
+          "uacr": 8,
+          "egfr": 111,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2026-01-10",
+          "hba1c": 7.0,
+          "sbp": 112,
+          "dbp": 70,
+          "ldl": 91,
+          "uacr": 9,
+          "egfr": 110,
+          "retinal_stage": 0
+        }
+      ],
+      "expected_risk_state": "STABLE"
+    },
+    {
+      "id": "P002",
+      "description": "Worsening systemic risk without observed retinal progression",
+      "age": 13,
+      "sex": "F",
+      "height_cm": 154,
+      "puberty_status": "started",
+      "t1d_diagnosis": "2017-01-10",
+      "timeline": [
+        {
+          "date": "2024-01-10",
+          "hba1c": 7.0,
+          "sbp": 110,
+          "dbp": 70,
+          "ldl": 90,
+          "uacr": 8,
+          "egfr": 112,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2025-01-10",
+          "hba1c": 7.8,
+          "sbp": 120,
+          "dbp": 76,
+          "ldl": 108,
+          "uacr": 15,
+          "egfr": 106,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2026-01-10",
+          "hba1c": 8.4,
+          "sbp": 128,
+          "dbp": 82,
+          "ldl": 121,
+          "uacr": 28,
+          "egfr": 100,
+          "retinal_stage": 0
+        }
+      ],
+      "expected_risk_state": "WATCH"
+    },
+    {
+      "id": "P003",
+      "description": "Incident mild NPDR with worsening systemic context",
+      "age": 13,
+      "sex": "F",
+      "height_cm": 155,
+      "puberty_status": "started",
+      "t1d_diagnosis": "2020-01-15",
+      "timeline": [
+        {
+          "date": "2024-01-15",
+          "hba1c": 7.1,
+          "sbp": 110,
+          "dbp": 70,
+          "ldl": 92,
+          "uacr": 8,
+          "egfr": 112,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2025-01-15",
+          "hba1c": 7.7,
+          "sbp": 118,
+          "dbp": 76,
+          "ldl": 108,
+          "uacr": 15,
+          "egfr": 106,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2026-01-15",
+          "hba1c": 8.3,
+          "sbp": 128,
+          "dbp": 82,
+          "ldl": 121,
+          "uacr": 31,
+          "egfr": 98,
+          "retinal_stage": 1
+        }
+      ],
+      "expected_risk_state": "HIGH_CONCERN"
+    },
+    {
+      "id": "P004",
+      "description": "Observed progression from mild to moderate NPDR",
+      "age": 16,
+      "sex": "M",
+      "height_cm": 172,
+      "puberty_status": "started",
+      "t1d_diagnosis": "2014-06-01",
+      "timeline": [
+        {
+          "date": "2024-06-01",
+          "hba1c": 7.5,
+          "sbp": 118,
+          "dbp": 72,
+          "ldl": 98,
+          "uacr": 10,
+          "egfr": 105,
+          "retinal_stage": 1
+        },
+        {
+          "date": "2025-06-01",
+          "hba1c": 7.6,
+          "sbp": 119,
+          "dbp": 73,
+          "ldl": 101,
+          "uacr": 11,
+          "egfr": 103,
+          "retinal_stage": 1
+        },
+        {
+          "date": "2026-06-01",
+          "hba1c": 7.8,
+          "sbp": 122,
+          "dbp": 75,
+          "ldl": 105,
+          "uacr": 12,
+          "egfr": 101,
+          "retinal_stage": 2
+        }
+      ],
+      "expected_risk_state": "HIGH_CONCERN"
+    },
+    {
+      "id": "P005",
+      "description": "Insufficient recent retinal evidence",
+      "age": 12,
+      "sex": "F",
+      "height_cm": 150,
+      "puberty_status": "started",
+      "t1d_diagnosis": "2020-08-01",
+      "timeline": [
+        {
+          "date": "2024-08-01",
+          "hba1c": 7.2,
+          "sbp": 112,
+          "dbp": 70,
+          "ldl": 95,
+          "uacr": 7,
+          "egfr": 115,
+          "retinal_stage": 0
+        },
+        {
+          "date": "2025-08-01",
+          "hba1c": 7.5,
+          "sbp": 116,
+          "dbp": 72,
+          "ldl": 99,
+          "uacr": 8,
+          "egfr": 111,
+          "retinal_stage": null
+        },
+        {
+          "date": "2026-08-01",
+          "hba1c": 7.4,
+          "sbp": 117,
+          "dbp": 72,
+          "ldl": 100,
+          "uacr": 9,
+          "egfr": 110,
+          "retinal_stage": null
+        }
+      ],
+      "expected_risk_state": "INSUFFICIENT_DATA"
+    }
+  ]
+}

@@ -1,11 +1,16 @@
 import { NextResponse } from 'next/server';
-import { getNeo4jDriver } from '@/lib/neo4j';
+import { getNeo4jDriver, DEFAULT_DATABASE } from '@/lib/neo4j';
 import { analyzePatientTrends } from '@/lib/temporalEngine';
 
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const driver = getNeo4jDriver();
-  const session = driver.session();
   const { id: patientId } = await params;
+  
+  if (!patientId) {
+    return NextResponse.json({ error: 'Patient ID is required' }, { status: 400 });
+  }
+
+  const driver = getNeo4jDriver();
+  const session = driver.session(DEFAULT_DATABASE ? { database: DEFAULT_DATABASE } : undefined);
   
   try {
     const patientResult = await session.run(`

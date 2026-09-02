@@ -1,0 +1,167 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-bottom: 3rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.moduleTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-amber);
+  font-weight: 600;
+}
+
+.header h2 {
+  font-family: var(--font-mono);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.demographics {
+  display: flex;
+  gap: 8px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.riskPill {
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.patternBanner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.topRow {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5rem;
+}
+
+.gaugeWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gaugeWrap h3, .biomarkersPanel h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.scoreStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.scoreStat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.scoreStatNum {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-cyan);
+}
+
+.scoreStatLabel {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.biomarkersPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.biomarkerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+}
+
+.rulesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--color-red);
+  background-color: rgba(239, 68, 68, 0.05);
+  border: 1px solid var(--color-red);
+  border-radius: var(--radius-md);
+}

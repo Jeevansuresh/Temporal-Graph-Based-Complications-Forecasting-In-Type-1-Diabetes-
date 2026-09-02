@@ -7,12 +7,20 @@ export default function PatientsPage() {
   const [patients, setPatients] = useState<any[]>([]);
   const [patientData, setPatientData] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadData() {
       try {
         const res = await fetch('/api/patients');
         const list = await res.json();
+        
+        if (list.error) {
+          setError(list.error);
+          setPatients([]);
+          return;
+        }
+        
         setPatients(list);
 
         // Fetch details for each to get trends/sparklines
@@ -22,8 +30,9 @@ export default function PatientsPage() {
           details[p.patient_id] = await detailRes.json();
         }
         setPatientData(details);
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
+        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -44,6 +53,13 @@ export default function PatientsPage() {
       
       {loading ? (
         <div className={styles.loading}>Loading cohort data from Neo4j...</div>
+      ) : error ? (
+        <div className={styles.error} style={{ color: 'var(--color-red)', padding: '2rem', textAlign: 'center', backgroundColor: 'rgba(239, 68, 68, 0.05)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-red)', marginTop: '2rem' }}>
+          <h3>Error loading patients</h3>
+          <p>{error}</p>
+        </div>
+      ) : patients.length === 0 ? (
+        <div className={styles.message} style={{ padding: '2rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>No patients found.</div>
       ) : (
         <div className={styles.grid}>
           {patients.map(p => (

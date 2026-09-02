@@ -1,0 +1,48 @@
+id,name,type,synonyms,unit,description
+R01,T1D,Condition,,,Type 1 diabetes mellitus
+R02,Age,Context,,years,Patient age
+R03,Sex,Context,,,Patient sex
+R04,Height,Context,,cm,Height for pediatric BP context
+R05,Puberty_Status,Context,,,Pubertal status
+R06,T1D_Duration,Context,,years,Years since T1D diagnosis
+R07,HbA1c,Measurement,A1C,%,Glycated hemoglobin
+R08,HbA1c_Variability,Derived_Temporal_Feature,,,Temporal variability of HbA1c
+R09,Glucose,Measurement,,mg/dL,Glucose value when available
+R10,CGM_Time_in_Range,Measurement,TIR,%,Optional CGM metric
+R11,Systolic_BP,Measurement,SBP,mmHg,Systolic BP
+R12,Diastolic_BP,Measurement,DBP,mmHg,Diastolic BP
+R13,Blood_Pressure_Status,Derived_State,,,Pediatric-contextualized BP status
+R14,LDL,Measurement,,mg/dL,LDL cholesterol
+R15,HDL,Measurement,,mg/dL,HDL cholesterol
+R16,Triglycerides,Measurement,,mg/dL,Triglycerides
+R17,Dyslipidemia,Derived_State,,,Lipid abnormality
+R18,UACR,Measurement,Albumin/Cr Ratio,mg/g,Spot urine albumin-creatinine ratio
+R19,Albuminuria,Derived_State,,,Albuminuria state
+R20,eGFR,Measurement,,mL/min/1.73m2,Estimated glomerular filtration rate
+R21,Creatinine,Measurement,Creat,mg/dL,Serum creatinine
+R22,Retinal_Exam,Event,,,Dilated/comprehensive eye exam or retinal photography
+R23,Retinopathy_Stage,Clinical_State,,,ICDR-style retinal severity stage
+R24,No_DR,Retinal_State,,,No apparent diabetic retinopathy
+R25,Mild_NPDR,Retinal_State,,,Mild nonproliferative diabetic retinopathy
+R26,Moderate_NPDR,Retinal_State,,,Moderate nonproliferative diabetic retinopathy
+R27,Severe_NPDR,Retinal_State,,,Severe nonproliferative diabetic retinopathy
+R28,PDR,Retinal_State,,,Proliferative diabetic retinopathy
+R29,Retinal_Stage_Change,Derived_Temporal_Feature,,,Difference between consecutive retinal states
+R30,Incident_Retinopathy,Derived_State,,,Transition from no DR to any DR
+R31,Retinopathy_Progression,Derived_State,,,Observed worsening in retinal stage
+R32,Retinopathy_Risk,Risk_State,,,Qualitative emerging progression risk
+R33,Screening_Eligible,Clinical_State,,,Meets configured initial screening criteria
+R34,Screening_Due,Clinical_State,,,Meets configured repeat screening timing
+R35,Data_Quality,Context,,,Completeness/recency of retinal and systemic observations
+R36,Risk_State,Clinical_State,,,STABLE/WATCH/INCREASING_CONCERN/HIGH_CONCERN/INSUFFICIENT_DATA
+R40,Glycemic_Control,Concept,,,Glycemic control state represented by glycemic measurements
+R41,Poor_Glycemic_Control,Concept,,,Persistent/worsening glycemic exposure or above individualized clinical goal
+R42,Glycemic_Risk_Signal,Derived_State,,,Supporting retinopathy risk signal from glycemic trajectory
+R43,BP_Risk_Signal,Derived_State,,,Supporting retinopathy risk signal from blood-pressure trajectory
+R44,Lipid_Risk_Signal,Derived_State,,,Supporting retinopathy risk signal from lipid trajectory
+R45,Kidney_Context_Risk_Signal,Derived_State,,,Supporting systemic microvascular/kidney context signal
+R46,Stable_Retinal_State,Derived_State,,,No observed change in retinal stage
+R48,HIGH_CONCERN,Risk_State,,,High concern risk state used by the prototype reasoning engine
+R49,INCREASING_CONCERN,Risk_State,,,Increasing concern risk state used by the prototype reasoning engine
+R50,WATCH,Risk_State,,,Watch risk state used by the prototype reasoning engine
+R51,INSUFFICIENT_DATA,Risk_State,,,Insufficient data/uncertainty state
