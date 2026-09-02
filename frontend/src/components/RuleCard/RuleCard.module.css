@@ -1,0 +1,87 @@
+.card {
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-1px);
+}
+
+.satisfied {
+  background-color: rgba(239, 68, 68, 0.05);
+  border-color: var(--color-red);
+}
+
+.unsatisfied {
+  background-color: var(--color-bg-surface);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.id {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+}
+
+.badgeOn {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
+}
+
+.badgeOff {
+  background-color: var(--color-glass);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.trigger {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.trigger span {
+  color: var(--color-amber);
+  font-weight: 500;
+}
+
+.reason {
+  font-size: 0.82rem;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+}
+
+.recommendation {
+  font-size: 0.82rem;
+  color: var(--color-cyan);
+  padding: 6px 10px;
+  background-color: var(--color-glass);
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--color-cyan);
+}

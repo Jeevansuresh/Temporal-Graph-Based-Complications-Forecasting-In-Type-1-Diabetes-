@@ -5,10 +5,10 @@ import { Users, Activity, Heart, Eye, Network, BookOpen, Search } from 'lucide-r
 import styles from './Sidebar.module.css';
 
 const navItems = [
-  { href: '/patients', label: 'Patient Cohort', icon: Users },
-  { href: '/patients/P001/kidney', label: 'Kidney Module', icon: Activity },
-  { href: '/patients/P001/cardio', label: 'Cardio Module', icon: Heart, badge: 'Soon' },
-  { href: '/patients/P001/retinopathy', label: 'Retinopathy', icon: Eye, badge: 'Soon' },
+  { href: '/patients', label: 'Patient Cohort', icon: Users, exact: true },
+  { href: '/kidney', label: 'Kidney Module', icon: Activity, suffix: true },
+  { href: '/cardio', label: 'Cardio Module', icon: Heart, suffix: true },
+  { href: '/retinopathy', label: 'Retinopathy', icon: Eye, suffix: true, badge: 'Soon' as const },
   { href: '/knowledge-graph', label: 'Knowledge Graph', icon: Network },
   { href: '/evidence', label: 'Evidence Library', icon: BookOpen },
 ];
@@ -35,8 +35,15 @@ export default function Sidebar() {
         <ul>
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname.startsWith(item.href) || 
-              (item.href === '/patients' && pathname === '/');
+            // For module links, match by suffix of current path
+            let isActive = false;
+            if (item.exact) {
+              isActive = pathname === item.href || pathname === '/';
+            } else if (item.suffix) {
+              isActive = pathname.endsWith(item.href);
+            } else {
+              isActive = pathname.startsWith(item.href);
+            }
             
             return (
               <li key={item.href}>
