@@ -13,13 +13,14 @@ export async function GET(
 ) {
   const { id: patientId } = await params;
   const driver = getRetinopathyDriver();
-  const session = driver.session({ database: RETINOPATHY_DATABASE });
+  const session = driver.session(RETINOPATHY_DATABASE ? { database: RETINOPATHY_DATABASE } : undefined);
 
   try {
+    // Patient meta — Retinopathy model stores t1d_diagnosis (date), not t1d_duration
     const metaResult = await session.run(
       `MATCH (p:Patient {patient_id: $patientId})
        RETURN p.patient_id AS patient_id, p.age AS age, p.sex AS sex,
-              p.t1d_duration AS t1d_duration, p.puberty_status AS puberty_status`,
+              p.t1d_diagnosis AS t1d_diagnosis, p.puberty_status AS puberty_status`,
       { patientId }
     );
 
@@ -29,28 +30,50 @@ export async function GET(
 
     const pr = metaResult.records[0];
     const pAge = pr.get('age');
-    const pT1d = pr.get('t1d_duration');
+    const pT1dDiagnosis = pr.get('t1d_diagnosis'); // Neo4j Date object or string
+
+    // Calculate t1d_duration in years from diagnosis date
+    let t1dDurationYears: number | null = null;
+    if (pT1dDiagnosis) {
+      const diagStr = pT1dDiagnosis.toString(); // "YYYY-MM-DD"
+      const diagYear = parseInt(diagStr.substring(0, 4), 10);
+      const nowYear = new Date().getFullYear();
+      t1dDurationYears = isNaN(diagYear) ? null : nowYear - diagYear;
+    }
+
     const patientMeta = {
       patient_id: pr.get('patient_id'),
       age: pAge?.toNumber ? pAge.toNumber() : pAge,
       sex: pr.get('sex'),
-      t1d_duration: pT1d?.toNumber ? pT1d.toNumber() : pT1d,
+      t1d_diagnosis: pT1dDiagnosis?.toString() ?? null,
+      t1d_duration: t1dDurationYears,
       puberty_status: pr.get('puberty_status'),
     };
 
-    const visitResult = await session.run(
+    // Fetch numeric measurements (all non-retinal concepts)
+    const numericResult = await session.run(
       `MATCH (p:Patient {patient_id: $patientId})-[:HAS_VISIT]->(v:Visit)
        OPTIONAL MATCH (v)-[:HAS_MEASUREMENT]->(m:Measurement)-[:INSTANCE_OF]->(c:Concept)
+       WHERE c.name <> 'Retinopathy_Stage'
        RETURN v.date AS date, c.name AS concept, m.value AS value
        ORDER BY v.date, c.name`,
       { patientId }
     );
 
+    // Fetch retinal measurements separately (stage_index stored on Measurement node)
+    const retinalResult = await session.run(
+      `MATCH (p:Patient {patient_id: $patientId})-[:HAS_VISIT]->(v:Visit)
+       MATCH (v)-[:HAS_MEASUREMENT]->(m:Measurement)-[:INSTANCE_OF]->(c:Concept {name: 'Retinopathy_Stage'})
+       RETURN v.date AS date, m.stage_index AS stage_index
+       ORDER BY v.date`,
+      { patientId }
+    );
+
+    // All visit dates
     const datesSet = new Set<string>();
-    const observations: { date: string; stage_index: number }[] = [];
     const timelineRaw: Record<string, Record<string, number>> = {};
 
-    for (const record of visitResult.records) {
+    for (const record of numericResult.records) {
       const date = record.get('date')?.toString();
       if (!date) continue;
       datesSet.add(date);
@@ -62,10 +85,22 @@ export async function GET(
       const value = rawVal?.toNumber ? rawVal.toNumber() : rawVal;
 
       if (!timelineRaw[date]) timelineRaw[date] = {};
-      timelineRaw[date][concept] = value;
+      if (value !== null && value !== undefined) {
+        timelineRaw[date][concept] = value;
+      }
+    }
 
-      if (concept === 'retinal_stage_index') {
-        observations.push({ date, stage_index: value });
+    // Collect retinal observations and add their visit dates
+    const observations: { date: string; stage_index: number }[] = [];
+    for (const record of retinalResult.records) {
+      const date = record.get('date')?.toString();
+      if (!date) continue;
+      datesSet.add(date);
+
+      const rawIdx = record.get('stage_index');
+      const stageIndex = rawIdx?.toNumber ? rawIdx.toNumber() : rawIdx;
+      if (stageIndex !== null && stageIndex !== undefined) {
+        observations.push({ date, stage_index: stageIndex });
       }
     }
 
@@ -73,7 +108,7 @@ export async function GET(
     const retinalTrajectory = analyzeRetinalTrajectory(allDates, observations);
 
     const numericFeatures: Record<string, any> = {};
-    for (const concept of ['HbA1c', 'Systolic_BP', 'Diastolic_BP', 'LDL', 'UACR', 'eGFR', 'T1D_Duration']) {
+    for (const concept of ['HbA1c', 'Systolic_BP', 'Diastolic_BP', 'LDL', 'UACR', 'eGFR']) {
       const vals: number[] = [];
       for (const d of allDates) {
         if (timelineRaw[d] && typeof timelineRaw[d][concept] === 'number') {

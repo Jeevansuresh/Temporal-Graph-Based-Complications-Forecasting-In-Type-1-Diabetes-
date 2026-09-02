@@ -128,10 +128,10 @@ export function evaluateRetinopathyRules(profile: any) {
     evaluations[id] = { rule_id: id, name, trigger, satisfied, reason };
   };
 
-  const duration = profile.numeric_features['T1D_Duration'];
+  const duration = profile.context.t1d_duration;
   const age = profile.context.age;
   const puberty = profile.context.puberty_status;
-  const durationVal = duration?.latest_value ?? null;
+  const durationVal: number | null = typeof duration === 'number' ? duration : null;
   const durationOk = durationVal !== null && durationVal >= 3;
   const ageOrPubertyOk = (age !== null && age >= 11) || puberty === 'started';
   const initialNotCompleted = trajectory.n_observed === 0;

@@ -7,10 +7,14 @@ KIDNEY_NEO4J_* variables so both modules can share a single .env safely.
 
 import os
 from dataclasses import dataclass
+from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+# Resolve the project root .env regardless of where the script is invoked from.
+# This file lives at Retinopathy/app/graph/config.py so the root is 3 levels up.
+_ROOT_ENV = Path(__file__).resolve().parents[3] / ".env"
+load_dotenv(_ROOT_ENV)
 
 
 @dataclass(frozen=True)

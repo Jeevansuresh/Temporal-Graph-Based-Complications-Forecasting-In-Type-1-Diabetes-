@@ -3,7 +3,7 @@ import { getRetinopathyDriver, RETINOPATHY_DATABASE } from '@/lib/neo4jRetinopat
 
 export async function GET() {
   const driver = getRetinopathyDriver();
-  const session = driver.session({ database: RETINOPATHY_DATABASE });
+  const session = driver.session(RETINOPATHY_DATABASE ? { database: RETINOPATHY_DATABASE } : undefined);
 
   try {
     const result = await session.run(`
