@@ -7,6 +7,7 @@ import BiomarkerCard from '@/components/BiomarkerCard/BiomarkerCard';
 import AIReasonerPanel from '@/components/AIReasonerPanel/AIReasonerPanel';
 import RuleCard from '@/components/RuleCard/RuleCard';
 import TrajectoryScoreGauge from '@/components/TrajectoryScoreGauge/TrajectoryScoreGauge';
+import PatientChatbot from '@/components/PatientChatbot/PatientChatbot';
 import styles from './page.module.css';
 
 export default function CardioPage() {
@@ -178,6 +179,11 @@ export default function CardioPage() {
       {/* ── AI REASONER ── */}
       <section>
         <AIReasonerPanel content={reasoning} loading={reasoningLoading} />
+      </section>
+
+      {/* ── CLINICAL CHATBOT ── */}
+      <section>
+        <PatientChatbot module="cardio" patientId={id} patientData={data} />
       </section>
     </div>
   );

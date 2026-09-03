@@ -122,6 +122,7 @@ function analyzeVariable(concept: string, values: number[]) {
     directionality: DIRECTIONALITY[concept] ?? 'higher_is_worse',
     monotonicity: classifyMonotonicity(values),
     absolute_change: parseFloat(calcChange(values).toFixed(4)),
+    percent_change: parseFloat(calcPctChange(values).toFixed(2)),
     percentage_change: parseFloat(calcPctChange(values).toFixed(2)),
     slope: parseFloat(calcSlope(values).toFixed(4)),
     variability: parseFloat(calcVariability(values).toFixed(4)),
@@ -313,7 +314,12 @@ export function evaluateRules(
   const visits = dates.map(d => timeline[d]);
   const latestVisit = visits[visits.length - 1] ?? {};
 
-  const safeFloat = (v: any) => { const f = parseFloat(v); return isNaN(f) ? null : f; };
+  const safeFloat = (v: any) => {
+    if (v === undefined || v === null) return null;
+    if (typeof v === 'object' && 'value' in v) v = v.value;
+    const f = parseFloat(v);
+    return isNaN(f) ? null : f;
+  };
 
   const sbpVals = visits.map(v => safeFloat(v['Systolic_BP'])).filter(v => v !== null) as number[];
   const dbpVals = visits.map(v => safeFloat(v['Diastolic_BP'])).filter(v => v !== null) as number[];

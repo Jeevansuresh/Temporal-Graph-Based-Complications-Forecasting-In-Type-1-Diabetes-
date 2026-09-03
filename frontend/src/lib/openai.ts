@@ -7,10 +7,11 @@ let client: OpenAI | null = null;
 
 export function getOpenAIClient() {
   if (!client) {
+    const isV1Endpoint = endpoint.includes('/openai/v1') || endpoint.includes('/v1');
     client = new OpenAI({
       apiKey,
       baseURL: endpoint,
-      defaultQuery: { 'api-version': '2024-02-15-preview' },
+      ...(isV1Endpoint ? {} : { defaultQuery: { 'api-version': '2024-02-15-preview' } }),
       defaultHeaders: { 'api-key': apiKey },
     });
   }

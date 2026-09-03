@@ -5,6 +5,7 @@ import RiskBadge from '@/components/RiskBadge/RiskBadge';
 import TimeSeriesChart from '@/components/TimeSeriesChart/TimeSeriesChart';
 import BiomarkerCard from '@/components/BiomarkerCard/BiomarkerCard';
 import AIReasonerPanel from '@/components/AIReasonerPanel/AIReasonerPanel';
+import PatientChatbot from '@/components/PatientChatbot/PatientChatbot';
 import styles from './page.module.css';
 
 export default function KidneyPage() {
@@ -99,6 +100,10 @@ export default function KidneyPage() {
 
       <section className={styles.reasonerSection}>
         <AIReasonerPanel content={reasoning} loading={!reasoning} />
+      </section>
+
+      <section>
+        <PatientChatbot module="kidney" patientId={id} patientData={data} />
       </section>
     </div>
   );

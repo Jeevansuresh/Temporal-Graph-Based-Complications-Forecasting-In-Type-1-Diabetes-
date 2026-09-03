@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { Bot, ChevronDown, ChevronUp } from 'lucide-react';
+import MarkdownView from '@/components/MarkdownView/MarkdownView';
 import styles from './AIReasonerPanel.module.css';
 
 export default function AIReasonerPanel({ content, loading }: { content: string | null; loading: boolean }) {
@@ -40,19 +41,7 @@ export default function AIReasonerPanel({ content, loading }: { content: string 
       
       {expanded && (
         <div className={styles.content}>
-          <div className={styles.markdown}>
-            {/* Simple markdown rendering for the sections requested */}
-            {content.split('\n').map((line, i) => {
-              if (line.startsWith('### ')) {
-                return <h4 key={i} className={styles.sectionHeader}>{line.substring(4)}</h4>;
-              }
-              if (line.startsWith('- ')) {
-                return <li key={i}>{line.substring(2)}</li>;
-              }
-              if (line.trim() === '') return <br key={i} />;
-              return <p key={i}>{line}</p>;
-            })}
-          </div>
+          <MarkdownView content={content} />
         </div>
       )}
     </div>

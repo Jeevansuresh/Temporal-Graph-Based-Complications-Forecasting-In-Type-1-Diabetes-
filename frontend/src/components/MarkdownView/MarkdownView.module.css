@@ -1,0 +1,57 @@
+.markdownBody {
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--color-text-primary, #f1f5f9);
+}
+
+.h1 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem 0;
+  color: #ffffff;
+}
+
+.h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.9rem 0 0.4rem 0;
+  color: var(--theme-color, #38bdf8);
+}
+
+.h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.8rem 0 0.35rem 0;
+  color: var(--theme-color, #38bdf8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.25rem;
+}
+
+.p {
+  margin: 0.4rem 0;
+}
+
+.list {
+  margin: 0.4rem 0 0.6rem 1.25rem;
+  padding: 0;
+}
+
+.list li {
+  margin-bottom: 0.35rem;
+}
+
+.hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 1rem 0;
+}
+
+.inlineCode {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.85em;
+  color: var(--theme-color, #38bdf8);
+}

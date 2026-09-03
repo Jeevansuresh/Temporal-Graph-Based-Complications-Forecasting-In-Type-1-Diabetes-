@@ -5,6 +5,7 @@ import { Eye } from 'lucide-react';
 import BiomarkerCard from '@/components/BiomarkerCard/BiomarkerCard';
 import AIReasonerPanel from '@/components/AIReasonerPanel/AIReasonerPanel';
 import RuleCard from '@/components/RuleCard/RuleCard';
+import PatientChatbot from '@/components/PatientChatbot/PatientChatbot';
 import styles from './page.module.css';
 
 export default function RetinopathyPage() {
@@ -128,6 +129,10 @@ export default function RetinopathyPage() {
 
       <section>
         <AIReasonerPanel content={reasoning} loading={reasoningLoading} />
+      </section>
+
+      <section>
+        <PatientChatbot module="retinopathy" patientId={id} patientData={data} />
       </section>
     </div>
   );

@@ -16,6 +16,9 @@ export default function BiomarkerCard({ concept, data }: { concept: string; data
   if (isWorsening) borderClass = styles.worsening;
   if (isImproving) borderClass = styles.improving;
 
+  const abs = data.absolute_change ?? 0;
+  const pct = data.percent_change ?? data.percentage_change ?? 0;
+
   return (
     <div className={`${styles.card} ${borderClass}`}>
       <div className={styles.header}>
@@ -29,25 +32,25 @@ export default function BiomarkerCard({ concept, data }: { concept: string; data
       
       <div className={styles.values}>
         <div className={styles.changeBox}>
-          <span className={styles.value}>{data.first}</span>
+          <span className={styles.value}>{data.first ?? '-'}</span>
           <ArrowRight />
-          <span className={`${styles.value} ${styles.latest}`}>{data.latest}</span>
+          <span className={`${styles.value} ${styles.latest}`}>{data.latest ?? '-'}</span>
         </div>
         
         <div className={styles.stats}>
           <div className={styles.stat}>
             <span className={styles.label}>Δ Abs</span>
-            <span className={styles.statValue}>{data.absolute_change > 0 ? '+' : ''}{data.absolute_change.toFixed(1)}</span>
+            <span className={styles.statValue}>{abs > 0 ? '+' : ''}{typeof abs === 'number' ? abs.toFixed(1) : abs}</span>
           </div>
           <div className={styles.stat}>
             <span className={styles.label}>Δ %</span>
-            <span className={styles.statValue}>{data.percent_change > 0 ? '+' : ''}{data.percent_change.toFixed(1)}%</span>
+            <span className={styles.statValue}>{pct > 0 ? '+' : ''}{typeof pct === 'number' ? pct.toFixed(1) : pct}%</span>
           </div>
         </div>
       </div>
       
       <div className={styles.footer}>
-        <span className={styles.tag}>{data.direction.toUpperCase()}</span>
+        <span className={styles.tag}>{(data.direction ?? 'stable').toUpperCase()}</span>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { getCardioDriver, CARDIO_DATABASE } from '@/lib/neo4jCardio';
 
 export async function GET() {
   const driver = getCardioDriver();
-  const session = driver.session({ database: CARDIO_DATABASE });
+  const session = driver.session(CARDIO_DATABASE ? { database: CARDIO_DATABASE } : undefined);
 
   try {
     const result = await session.run(`

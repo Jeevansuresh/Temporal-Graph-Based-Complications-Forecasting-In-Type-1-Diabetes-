@@ -16,7 +16,7 @@ export async function GET(
 ) {
   const { id: patientId } = await params;
   const driver = getCardioDriver();
-  const session = driver.session({ database: CARDIO_DATABASE });
+  const session = driver.session(CARDIO_DATABASE ? { database: CARDIO_DATABASE } : undefined);
 
   try {
     // Patient metadata
