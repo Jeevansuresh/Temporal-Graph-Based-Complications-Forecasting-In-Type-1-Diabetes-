@@ -123,7 +123,7 @@ export default function PatientChatbot({ module, patientId, patientData }: Patie
         <div className={styles.lockedContent}>
           <div className={styles.lockIcon}><Lock size={32} /></div>
           <p className={styles.lockTitle}>Premium Feature</p>
-          <p className={styles.lockSub}>Sign in to chat with the AI assistant about this patient's trajectory.</p>
+          <p className={styles.lockSub}>Sign in to chat with the AI assistant. (This feature consumes real LLM tokens!)</p>
           <Link href={`/login?next=${encodeURIComponent(pathname)}`} className={styles.loginBtn}>
             <LogIn size={16} />
             Sign in to Access

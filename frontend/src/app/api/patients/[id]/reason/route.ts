@@ -1,12 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getNeo4jDriver } from '@/lib/neo4j';
 import { getOpenAIClient } from '@/lib/openai';
-import { checkApiAuth } from '@/lib/apiAuth';
 
 export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const authError = checkApiAuth(request);
-  if (authError) return authError;
-
   const driver = getNeo4jDriver();
   const session = driver.session();
   const { id: patientId } = await params;
