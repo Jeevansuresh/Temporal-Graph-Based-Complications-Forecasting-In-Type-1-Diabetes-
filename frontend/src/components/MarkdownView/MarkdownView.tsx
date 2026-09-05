@@ -2,8 +2,14 @@ import React from 'react';
 import styles from './MarkdownView.module.css';
 
 function parseInline(text: string): React.ReactNode[] {
-  const parts = text.split(/(\*\*.*?\*\*|\*.*?\*|`.*?`)/g);
+  const parts = text.split(/(\[.*?\]\(.*?\)|\*\*.*?\*\*|\*.*?\*|`.*?`)/g);
   return parts.map((part, index) => {
+    if (part.startsWith('[') && part.includes('](') && part.endsWith(')')) {
+      const match = part.match(/\[(.*?)\]\((.*?)\)/);
+      if (match) {
+        return <a key={index} href={match[2]} className={styles.link}>{match[1]}</a>;
+      }
+    }
     if (part.startsWith('**') && part.endsWith('**') && part.length >= 4) {
       return <strong key={index}>{parseInline(part.slice(2, -2))}</strong>;
     }
