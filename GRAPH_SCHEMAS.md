@@ -1,8 +1,9 @@
 # 🧬 Neo4j Graph Schemas & Architecture Specification
 
 **Project:** T1D-CareGraph (Temporal Graph-Based Complications Forecasting in Type 1 Diabetes)  
-**Author:** Dr. Jeevan Suresh (`drjeevan@apollo.com`) — Apollo Hospitals  
+**Author:** T1D Clinical Intelligence Research Group  
 **Specification Version:** 3.1.0 (Extracted directly via Neo4j API & Programmatically Rendered Engine)
+
 
 ---
 

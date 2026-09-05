@@ -11,14 +11,19 @@
 
 ---
 
-## 🔐 Clinical Portal Authentication & Demo Credentials
+## 🔐 Clinical Portal Authentication & Environment Setup
 
 The platform features a secure, HIPAA-compliant login system tailored for endocrinologists and clinical investigators.
 
-### 🔑 Authorized Doctor Login Credentials
-- **Authorized Email:** `drjeevan@apollo.com`
-- **Password:** `Doctor7604@!`
-- **Clinician Profile:** Dr. Jeevan Suresh (Lead Endocrinologist, Apollo Hospitals)
+### 🔑 Authentication Configuration
+Portal access credentials and API configurations are managed securely via environment variables:
+
+```bash
+# Configure portal access in your environment or .env file
+NEXT_PUBLIC_CLINICAL_EMAIL=doctor@hospital.org
+NEXT_PUBLIC_CLINICAL_PASSWORD=your_secure_password
+```
+
 - **Portal Access URL:** `http://localhost:3000/login`
 
 ---
@@ -60,6 +65,17 @@ All graph structures have been extracted via Neo4j Bolt API drivers and defined 
 - **TypeScript Type Definitions:** [`frontend/src/types/graph.ts`](frontend/src/types/graph.ts)
 - **Live Neo4j Extractor:** [`scratch/extract_schemas.py`](scratch/extract_schemas.py)
 - **Real Graph Renderer:** [`generate_real_graph_images.py`](generate_real_graph_images.py)
+
+---
+
+## 🌐 Dashboard Modules
+
+1. **👥 Patient Cohort Explorer (`/patients`)**: Multi-organ patient risk dashboard & cohort filtering.
+2. **👁️ Diabetic Retinopathy (`/retinopathy`)**: Microvascular retinal diagnostic reasoning & AI panel.
+3. **🫀 Cardiovascular Module (`/cardio`)**: ASCVD, Coronary Calcification, & Autonomic trajectory analyzer.
+4. **🧪 Nephropathy & Kidney Module (`/kidney`)**: KDIGO eGFR/UACR renal risk grid & hyperfiltration detection.
+5. **🕸️ Knowledge Graph Visualizer (`/knowledge-graph`)**: Dynamic Cytoscape/Vis.js visualization of all 3 CKGs and TG.
+6. **📚 Evidence & Guideline Library (`/evidence`)**: ADA 2024, KDIGO 2023, & ETDRS trial provenance library.
 
 ---
 

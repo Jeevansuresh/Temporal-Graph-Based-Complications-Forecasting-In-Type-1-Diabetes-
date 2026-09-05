@@ -41,12 +41,6 @@ export default function LoginPage() {
     }
   };
 
-  const autofillDemoCredentials = () => {
-    setEmail('drjeevan@apollo.com');
-    setPassword('Doctor7604@!');
-    setError(null);
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.bgGrid} />
@@ -61,7 +55,7 @@ export default function LoginPage() {
           <p className={styles.subtitle}>Temporal Complications Forecasting Portal</p>
           <div className={styles.hospitalBadge}>
             <Building2 size={13} />
-            <span>Apollo Hospitals System</span>
+            <span>Clinical Workspace System</span>
           </div>
         </div>
 
@@ -83,7 +77,7 @@ export default function LoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="drjeevan@apollo.com"
+                placeholder="doctor@hospital.org"
                 className={styles.input}
               />
             </div>
@@ -132,23 +126,6 @@ export default function LoginPage() {
             )}
           </button>
         </form>
-
-        <div className={styles.hintCard}>
-          <div className={styles.hintHeader}>
-            <span>Authorized Clinical Credentials</span>
-            <button 
-              type="button" 
-              onClick={autofillDemoCredentials}
-              className={styles.autofillBtn}
-            >
-              Auto-fill Credentials
-            </button>
-          </div>
-          <div className={styles.hintDetails}>
-            <div><strong>Email:</strong> drjeevan@apollo.com</div>
-            <div><strong>Password:</strong> Doctor7604@!</div>
-          </div>
-        </div>
 
         <div className={styles.footer}>
           <ShieldCheck size={14} />

@@ -25,14 +25,6 @@ const AuthContext = createContext<AuthContextType>({
   isLoading: true,
 });
 
-const DEFAULT_USER: User = {
-  name: 'Dr. Jeevan Suresh',
-  email: 'drjeevan@apollo.com',
-  role: 'Lead Endocrinologist',
-  hospital: 'Apollo Hospitals',
-  avatarInitials: 'JS',
-};
-
 const STORAGE_KEY = 't1d_caregraph_auth_user';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -68,14 +60,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const cleanEmail = email.trim().toLowerCase();
     
-    if (cleanEmail === 'drjeevan@apollo.com' && pass === 'Doctor7604@!') {
-      setUser(DEFAULT_USER);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_USER));
+    // Check against configured environment variables or non-empty valid inputs
+    const expectedEmail = (process.env.NEXT_PUBLIC_CLINICAL_EMAIL || '').trim().toLowerCase();
+    const expectedPassword = process.env.NEXT_PUBLIC_CLINICAL_PASSWORD || '';
+
+    let isValid = false;
+
+    if (expectedEmail && expectedPassword) {
+      isValid = cleanEmail === expectedEmail && pass === expectedPassword;
+    } else {
+      // Fallback: Validate email format & non-empty password if env is not explicitly set
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      isValid = emailRegex.test(cleanEmail) && pass.length >= 6;
+    }
+
+    if (isValid) {
+      const nameFromEmail = cleanEmail.split('@')[0].replace(/[^a-zA-Z]/g, ' ');
+      const formattedName = nameFromEmail ? `Dr. ${nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1)}` : 'Dr. Clinical Specialist';
+      const initials = cleanEmail.substring(0, 2).toUpperCase();
+
+      const userProfile: User = {
+        name: formattedName,
+        email: cleanEmail,
+        role: 'Lead Endocrinologist',
+        hospital: 'Clinical Workspace',
+        avatarInitials: initials,
+      };
+
+      setUser(userProfile);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(userProfile));
       return { success: true };
     } else {
       return { 
         success: false, 
-        error: 'Invalid credentials. Please verify your email and password.' 
+        error: 'Invalid credentials. Please verify your email address and password.' 
       };
     }
   };
