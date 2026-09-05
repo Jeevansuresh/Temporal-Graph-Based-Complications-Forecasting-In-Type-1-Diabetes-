@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Network, Mail, Lock, Eye, EyeOff, ShieldCheck, AlertCircle, ArrowRight, Building2 } from 'lucide-react';
 import styles from './login.module.css';
 
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -15,12 +15,14 @@ export default function LoginPage() {
 
   const { login, user, isLoading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const nextUrl = searchParams.get('next') || '/patients';
 
   useEffect(() => {
     if (!isLoading && user) {
-      router.push('/patients');
+      router.push(nextUrl);
     }
-  }, [user, isLoading, router]);
+  }, [user, isLoading, router, nextUrl]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +32,7 @@ export default function LoginPage() {
     try {
       const res = await login(email, password);
       if (res.success) {
-        router.push('/patients');
+        router.push(nextUrl);
       } else {
         setError(res.error || 'Authentication failed');
       }
@@ -133,5 +135,13 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className={styles.container}><div className={styles.spinner} /></div>}>
+      <LoginForm />
+    </Suspense>
   );
 }

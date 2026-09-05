@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server';
 import { getOpenAIClient } from '@/lib/openai';
+import { checkApiAuth } from '@/lib/apiAuth';
 
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const authError = checkApiAuth(request);
+  if (authError) return authError;
+
   const { id: patientId } = await params;
 
   try {

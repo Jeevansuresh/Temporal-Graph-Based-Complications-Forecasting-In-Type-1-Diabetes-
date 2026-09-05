@@ -85,3 +85,63 @@
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+.premiumBadge {
+  font-size: 0.75rem;
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-amber);
+  padding: 4px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  font-weight: 600;
+}
+
+.lockedContent {
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.lockIcon {
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.lockTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.lockSub {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.loginBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-cyan);
+  color: var(--color-bg-base);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.loginBtn:hover {
+  background-color: var(--color-cyan-glow);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
+}

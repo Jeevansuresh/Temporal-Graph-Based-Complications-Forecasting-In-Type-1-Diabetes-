@@ -46,13 +46,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      if (!user && pathname !== '/login') {
-        router.push('/login');
-      }
-    }
-  }, [user, isLoading, pathname, router]);
+  // No global redirect — only AI endpoints are gated.
+  // Individual components (AIReasonerPanel, PatientChatbot) check auth themselves.
 
   const login = async (email: string, pass: string): Promise<{ success: boolean; error?: string }> => {
     // Standard delay for realistic smooth transition

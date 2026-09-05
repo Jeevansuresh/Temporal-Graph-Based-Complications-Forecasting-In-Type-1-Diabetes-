@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
 import { getOpenAIClient } from '@/lib/openai';
 
+function isAuthorized(request: Request): boolean {
+  const secret = process.env.CLINICAL_API_SECRET;
+  if (!secret) return true; // if not configured, allow (dev mode)
+  const auth = request.headers.get('authorization') || '';
+  return auth === `Bearer ${secret}`;
+}
+
 export async function POST(request: Request) {
+  if (!isAuthorized(request)) {
+    return NextResponse.json({ error: 'Unauthorized. Please sign in to use the AI assistant.' }, { status: 401 });
+  }
   try {
     const body = await request.json();
     const { module, patientId, messages, patientData } = body;

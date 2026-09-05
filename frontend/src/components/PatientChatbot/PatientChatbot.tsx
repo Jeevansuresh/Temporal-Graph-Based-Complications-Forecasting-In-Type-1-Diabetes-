@@ -2,6 +2,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, MessageSquare } from 'lucide-react';
 import MarkdownView from '@/components/MarkdownView/MarkdownView';
+import { useAuth } from '@/context/AuthContext';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Lock, LogIn } from 'lucide-react';
 import styles from './PatientChatbot.module.css';
 
 interface PatientChatbotProps {
@@ -55,6 +59,9 @@ export default function PatientChatbot({ module, patientId, patientData }: Patie
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const feedRef = useRef<HTMLDivElement>(null);
+  
+  const { user } = useAuth();
+  const pathname = usePathname();
 
   useEffect(() => {
     feedRef.current?.scrollTo({ top: feedRef.current.scrollHeight, behavior: 'smooth' });
@@ -74,7 +81,10 @@ export default function PatientChatbot({ module, patientId, patientData }: Patie
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.NEXT_PUBLIC_CLINICAL_PASSWORD || ''}`
+        },
         body: JSON.stringify({
           module,
           patientId,
@@ -94,6 +104,33 @@ export default function PatientChatbot({ module, patientId, patientData }: Patie
     } finally {
       setLoading(false);
     }
+  }
+
+  if (!user) {
+    return (
+      <div className={styles.card} style={{ '--theme-color': config.color } as any}>
+        <div className={styles.header}>
+          <div className={styles.headerLeft}>
+            <div className={styles.iconWrap} style={{ color: config.color }}>
+              <Bot size={22} />
+            </div>
+            <div className={styles.titleBox}>
+              <h3>{config.title}</h3>
+            </div>
+          </div>
+          <span className={styles.premiumBadge}>⭐ Premium</span>
+        </div>
+        <div className={styles.lockedContent}>
+          <div className={styles.lockIcon}><Lock size={32} /></div>
+          <p className={styles.lockTitle}>Premium Feature</p>
+          <p className={styles.lockSub}>Sign in to chat with the AI assistant about this patient's trajectory.</p>
+          <Link href={`/login?next=${encodeURIComponent(pathname)}`} className={styles.loginBtn}>
+            <LogIn size={16} />
+            Sign in to Access
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
