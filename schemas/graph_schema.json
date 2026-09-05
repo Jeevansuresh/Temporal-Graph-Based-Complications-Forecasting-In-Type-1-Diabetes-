@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "T1D-CareGraph Comprehensive Neo4j Graph Schemas Specification",
+  "description": "JSON Schema specification defining the Neo4j node labels, properties, relationship types, and Cypher constraints for all 3 Clinical Knowledge Graphs (Kidney KG, Cardio KG, Retinopathy CKG) and the Temporal Patient Graph (TG).",
+  "type": "object",
+  "properties": {
+    "kidney_kg": { "$ref": "#/$defs/KnowledgeGraphSchema" },
+    "cardio_kg": { "$ref": "#/$defs/KnowledgeGraphSchema" },
+    "retinopathy_kg": { "$ref": "#/$defs/KnowledgeGraphSchema" },
+    "temporal_patient_graph": { "$ref": "#/$defs/TemporalPatientGraphSchema" }
+  },
+  "required": ["kidney_kg", "cardio_kg", "retinopathy_kg", "temporal_patient_graph"],
+  "$defs": {
+    "KnowledgeGraphSchema": {
+      "type": "object",
+      "properties": {
+        "domain": { "type": "string" },
+        "labels": { "type": "array", "items": { "type": "string" } },
+        "relationshipTypes": { "type": "array", "items": { "type": "string" } },
+        "nodeSchemas": {
+          "type": "object",
+          "properties": {
+            "Concept": { "$ref": "#/$defs/ConceptNodeSchema" },
+            "Rule": { "$ref": "#/$defs/RuleNodeSchema" },
+            "Evidence": { "$ref": "#/$defs/EvidenceNodeSchema" }
+          }
+        },
+        "constraints": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["domain", "labels", "relationshipTypes", "nodeSchemas"]
+    },
+    "ConceptNodeSchema": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "concept_id": { "type": ["integer", "string"] },
+        "type": { "type": "string" },
+        "synonyms": { "type": "array", "items": { "type": "string" } },
+        "unit": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "RuleNodeSchema": {
+      "type": "object",
+      "properties": {
+        "rule_id": { "type": "string" },
+        "trigger": { "type": "string" },
+        "logical_condition": { "type": "string" },
+        "temporal_requirement": { "type": "string" },
+        "output_concept": { "type": "string" },
+        "evidence_id": { "type": "string" }
+      },
+      "required": ["rule_id", "trigger", "logical_condition"]
+    },
+    "EvidenceNodeSchema": {
+      "type": "object",
+      "properties": {
+        "evidence_id": { "type": "string" },
+        "citation": { "type": "string" },
+        "year": { "type": "integer" },
+        "source_type": { "type": "string" },
+        "population": { "type": "string" },
+        "summary": { "type": "string" },
+        "url_doi": { "type": "string" },
+        "evidence_strength": { "type": "string" }
+      },
+      "required": ["evidence_id", "citation"]
+    },
+    "TemporalPatientGraphSchema": {
+      "type": "object",
+      "properties": {
+        "domain": { "type": "string", "const": "Temporal_Patient_Graph" },
+        "labels": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["Patient", "Visit", "Measurement"] }
+        },
+        "relationships": {
+          "type": "array",
+          "items": { "type": "string", "enum": ["HAS_VISIT", "HAS_MEASUREMENT", "INSTANCE_OF", "OBSERVED_STATE", "NEXT_VISIT"] }
+        },
+        "patientProperties": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "visitProperties": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "measurementProperties": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["domain", "labels", "relationships"]
+    }
+  }
+}

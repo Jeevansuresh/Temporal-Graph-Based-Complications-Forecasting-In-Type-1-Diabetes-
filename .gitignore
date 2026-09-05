@@ -38,6 +38,8 @@ htmlcov/
 *.log
 *.tmp
 *.bak
+scratch/
+
 
 # Operating System files
 .DS_Store

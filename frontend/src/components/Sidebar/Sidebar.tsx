@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Users, Activity, Heart, Eye, Network, BookOpen, Search } from 'lucide-react';
+import { Users, Activity, Heart, Eye, Network, BookOpen, Search, LogOut } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 import styles from './Sidebar.module.css';
 
 const navItems: { href: string; label: string; icon: any; exact?: boolean; suffix?: boolean; badge?: string }[] = [
@@ -15,6 +16,7 @@ const navItems: { href: string; label: string; icon: any; exact?: boolean; suffi
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
   return (
     <aside className={styles.sidebar}>
@@ -35,7 +37,6 @@ export default function Sidebar() {
         <ul>
           {navItems.map((item) => {
             const Icon = item.icon;
-            // For module links, match by suffix of current path
             let isActive = false;
             if (item.exact) {
               isActive = pathname === item.href || pathname === '/';
@@ -59,9 +60,29 @@ export default function Sidebar() {
       </nav>
       
       <div className={styles.footer}>
+        {user && (
+          <div className={styles.userCard}>
+            <div className={styles.userAvatar}>
+              <span>{user.avatarInitials}</span>
+            </div>
+            <div className={styles.userInfo}>
+              <span className={styles.userName}>{user.name}</span>
+              <span className={styles.userHospital}>{user.hospital}</span>
+            </div>
+            <button
+              onClick={logout}
+              className={styles.logoutBtn}
+              title="Sign Out"
+              aria-label="Sign Out"
+            >
+              <LogOut size={16} />
+            </button>
+          </div>
+        )}
+
         <div className={styles.status}>
           <div className={styles.statusDot}></div>
-          <span>System Online</span>
+          <span>Clinical Pipeline Online</span>
         </div>
       </div>
     </aside>
