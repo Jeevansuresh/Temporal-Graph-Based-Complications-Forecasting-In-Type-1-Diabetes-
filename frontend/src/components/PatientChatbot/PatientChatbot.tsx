@@ -78,6 +78,18 @@ export default function PatientChatbot({ module, patientId, patientData }: Patie
     if (!textToSend) setInput('');
     setLoading(true);
 
+    if (!user) {
+      setMessages(prev => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: `🔒 **Premium Feature Locked**\n\nSign in to chat with the AI assistant. (This feature consumes real LLM tokens!)\n\n[Click here to Sign In](/login?next=${encodeURIComponent(pathname)})`
+        }
+      ]);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -106,32 +118,6 @@ export default function PatientChatbot({ module, patientId, patientData }: Patie
     }
   }
 
-  if (!user) {
-    return (
-      <div className={styles.card} style={{ '--theme-color': config.color } as any}>
-        <div className={styles.header}>
-          <div className={styles.headerLeft}>
-            <div className={styles.iconWrap} style={{ color: config.color }}>
-              <Bot size={22} />
-            </div>
-            <div className={styles.titleBox}>
-              <h3>{config.title}</h3>
-            </div>
-          </div>
-          <span className={styles.premiumBadge}>⭐ Premium</span>
-        </div>
-        <div className={styles.lockedContent}>
-          <div className={styles.lockIcon}><Lock size={32} /></div>
-          <p className={styles.lockTitle}>Premium Feature</p>
-          <p className={styles.lockSub}>Sign in to chat with the AI assistant. (This feature consumes real LLM tokens!)</p>
-          <Link href={`/login?next=${encodeURIComponent(pathname)}`} className={styles.loginBtn}>
-            <LogIn size={16} />
-            Sign in to Access
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className={styles.card} style={{ '--theme-color': config.color } as any}>
